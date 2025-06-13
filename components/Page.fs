@@ -4,32 +4,34 @@ open Feliz
 open Fable.Core
 open Fetch
 
+type IReactMarkdownProps =
+    abstract children: string with get, set
+
+[<ImportDefault("react-markdown")>]
+let Markdown: IReactMarkdownProps -> ReactElement = jsNative
+
 [<ReactComponent>]
-let Page(nameList) =
+let Page(nameList: string list) =
   let content, setContent = React.useState("")
 
-  let loadContent (path: string) =
-    async {
-        try
-            let! response = fetch path [] |> Async.AwaitPromise
-            if response.Ok then
-                let! text = response.text() |> Async.AwaitPromise
-                return Ok text
-            else
-                return Error $"HTTP {response.Status}"
-        with
-        | ex -> return Error ex.Message
+  let loadContent () = async {
+        let path = String.concat "/" nameList
+        let! response = fetch (path + ".md") [] |> Async.AwaitPromise
+        if response.Ok then
+            let! text = response.text() |> Async.AwaitPromise
+            printfn "Loaded content from %s" path
+            printfn "Content: %s" text
+            setContent text
+        else
+            setContent ""
     }
 
-  React.useEffect(fun () -> 
-    async {
-        let! content = loadContent "/contents/pages/about.md" 
-        match content with
-        | Ok text -> setContent(text)
-        | Error msg -> setContent("")
-    } |> Async.StartImmediate
-  , [| nameList |])
+  React.useEffect(loadContent >> Async.StartImmediate, [| |])
 
   Html.div [
-    Html.p content
+    Markdown {new IReactMarkdownProps with                  
+                  member this.children
+                      with get (): string = content
+                      and set (v: string): unit = 
+                          failwith "Not Implemented"}
   ]
