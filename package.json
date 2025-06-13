@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
+		"dev": "vite dev",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
@@ -12,11 +13,13 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@types/node": "^24.0.1",
+		"pnpx": "^0.0.1",
 		"typescript": "^5.8.3",
 		"vite": "^6.3.5"
 	},
 	"dependencies": {
 		"react": "^19.1.0",
-		"react-dom": "^19.1.0"
+		"react-dom": "^19.1.0",
+		"react-markdown": "^10.1.0"
 	}
 }

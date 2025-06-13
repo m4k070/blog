@@ -1,0 +1,5 @@
+== 実行
+
+```
+dotnet fable watch --lang typescript --run pnpx tsc Program.fs.ts --target es2022 --watch --preserveWatchOutput
+```

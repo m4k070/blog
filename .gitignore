@@ -23,8 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# ReScript
-/lib/
-.bsb.lock
-.merlin
-*.mjs
+bin
+.config
+obj
+fable_modules
+*.fs.ts

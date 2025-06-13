@@ -2,11 +2,22 @@ module App
 
 open Feliz
 open Feliz.Router
+open Page
 
 [<ReactComponent>]
 let App () : ReactElement =
     let currentUrl = Router.currentPath ()
-
-    Html.div
-        [ prop.style [ style.padding 20 ]
-          prop.children [ Html.h1 "Feliz Router Example"; Html.p $"Current route: {currentUrl}" ] ]
+    match currentUrl with
+    | [ "pages" :: s ] ->
+      Html.div [
+        prop.style [ style.padding 20 ]
+        Page s
+      ]
+    | [ "pages"; s ] ->
+      Html.div [
+        Html.p "empty"
+      ]
+    | _ ->
+      Html.div [
+        Html.p "other"
+      ]
