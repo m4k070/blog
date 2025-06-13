@@ -6,12 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="App.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Fable.Browser.Dom" Version="2.19.0" />
     <PackageReference Include="Fable.Core" Version="4.5.0" />
+    <PackageReference Include="Feliz" Version="2.9.0" />
+    <PackageReference Include="Feliz.Router" Version="4.0.0" />
   </ItemGroup>
 
 </Project>

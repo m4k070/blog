@@ -1,5 +1,7 @@
-﻿open Browser
+﻿open Browser.Dom
+open Feliz
+open App
 
-let div = document.createElement "div"
-div.innerHTML <- "Hello world!"
-document.body.appendChild div |> ignore
+let elm = document.getElementById "root"
+let root = ReactDOM.createRoot (elm)
+root.render (App())
