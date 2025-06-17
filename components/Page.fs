@@ -3,7 +3,7 @@ module Page
 open Feliz
 open Fable.Core
 open Fetch
-open Parser
+open Layout
 
 let asciidoctor = Parser.asciidoctor()
 
@@ -25,4 +25,8 @@ let Page(nameList: string list) =
 
   React.useEffect(loadContent >> Async.StartImmediate, [| |])
 
-  Html.div [ prop.dangerouslySetInnerHTML (asciidoctor.convert content) ]
+  Layout(
+      Html.div [
+         prop.dangerouslySetInnerHTML (asciidoctor.convert content) 
+      ]
+  )

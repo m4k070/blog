@@ -7,6 +7,9 @@
 
   <ItemGroup>
     <Compile Include="lib/Parser.fs" />
+    <Compile Include="components/Header.fs" />
+    <Compile Include="components/Footer.fs" />
+    <Compile Include="components/Layout.fs" />
     <Compile Include="components/Page.fs" />
     <Compile Include="App.fs" />
     <Compile Include="Program.fs" />
