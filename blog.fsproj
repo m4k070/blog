@@ -7,11 +7,14 @@
 
   <ItemGroup>
     <Compile Include="lib/Parser.fs" />
+    <Compile Include="lib/PostMetadata.fs" />
     <Compile Include="components/Sidebar.fs" />
     <Compile Include="components/Header.fs" />
     <Compile Include="components/Footer.fs" />
     <Compile Include="components/Layout.fs" />
     <Compile Include="components/Page.fs" />
+    <Compile Include="components/Post.fs" />
+    <Compile Include="components/PostList.fs" />
     <Compile Include="App.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

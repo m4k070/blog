@@ -3,33 +3,28 @@ module Post
 open Feliz
 open Fable.Core
 open Fetch
+open Layout
 
-type IReactMarkdownProps =
-    abstract children: string with get
-
-[<ImportDefault("react-markdown")>]
-let Markdown: IReactMarkdownProps -> ReactElement = jsNative
+let asciidoctor = Parser.asciidoctor ()
 
 [<ReactComponent>]
-let Post(nameList: string list) =
-  let content, setContent = React.useState("")
+let Post (filename: string) =
+    let content, setContent = React.useState ("")
 
-  let loadContent () = async {
-        let path = String.concat "/" nameList
-        let! response = fetch (path + ".md") [] |> Async.AwaitPromise
-        if response.Ok then
-            let! text = response.text() |> Async.AwaitPromise
-            printfn "Loaded content from %s" path
-            printfn "Content: %s" text
-            setContent text
-        else
-            setContent ""
-    }
+    let loadContent () =
+        async {
+            let path = $"posts/{filename}.adoc"
+            let! response = fetch path [] |> Async.AwaitPromise
 
-  React.useEffect(loadContent >> Async.StartImmediate, [| |])
+            if response.Ok then
+                let! text = response.text () |> Async.AwaitPromise
+                printfn "Loaded content from %s" path
+                printfn "%s" text
+                setContent text
+            else
+                setContent ""
+        }
 
-  Html.div [
-    Markdown {new IReactMarkdownProps with                  
-                  member this.children
-                      with get (): string = content }
-  ]
+    React.useEffect (loadContent >> Async.StartImmediate, [||])
+
+    Layout(Html.div [ prop.dangerouslySetInnerHTML (asciidoctor.convert content None) ])
