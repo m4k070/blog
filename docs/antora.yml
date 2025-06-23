@@ -1,0 +1,6 @@
+name: my-project                    # 必須：コンポーネント名
+title: My Project Documentation     # 表示名
+version: '1.0'                     # バージョン
+start_page: ROOT:index.adoc        # 開始ページ
+nav:                               # ナビゲーション
+  - modules/ROOT/nav.adoc

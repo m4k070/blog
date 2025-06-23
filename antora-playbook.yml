@@ -1,0 +1,14 @@
+site:
+  title: My Documentation Site
+  url: https://m4k070.github.io/blog
+
+content:
+  sources:
+    - url: .                    # 現在のリポジトリを指定
+      branches: HEAD            # 現在のブランチ
+      start_path: docs         # コンテンツのルートパス
+
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
